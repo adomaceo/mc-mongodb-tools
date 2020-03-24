@@ -8,13 +8,13 @@ cd /tmp
 #
 function check_mc_configs {
     if [ -z "$AWS_ACCESS_KEY_ID" ]; then
-    echo "AWS_ACCESS_KEY_ID must be set"
-    exit 1
+        echo "AWS_ACCESS_KEY_ID must be set"
+        exit 1
     fi
 
     if [ -z "$AWS_SECRET_ACCESS_KEY" ]; then
-    echo "AWS_SECRET_ACCESS_KEY must be set"
-    exit 1
+        echo "AWS_SECRET_ACCESS_KEY must be set"
+        exit 1
     fi
 
     if [ -z "$API_SIGNATURE" ] ; then
@@ -24,8 +24,8 @@ function check_mc_configs {
     fi
 
     if [ -z "$S3_BUCKET_PATH" ]; then
-    echo "S3_BUCKET_PATH must be set"
-    exit 1
+        echo "S3_BUCKET_PATH must be set"
+        exit 1
     fi
 }
 
@@ -35,11 +35,11 @@ function check_mc_configs {
 function check_mongodb_configs {
     if [ -z "$MONGO_HOST" ]; then
     # default to a linked container with name "mongo"
-    MONGO_HOST="mongo"
+        MONGO_HOST="mongo"
     fi
 
     if [[ "$MONGO_DATABASE" ]]; then
-    MONGO_HOST+=" --db $MONGO_DATABASE"
+        MONGO_HOST+=" --db $MONGO_DATABASE"
     fi
 }
 
@@ -54,7 +54,7 @@ function restore {
     config_mc && \
     mc stat -q do/$S3_BUCKET_PATH/${FILE:-latest.gz} && \
     mc cp -q do/$S3_BUCKET_PATH/${FILE:-latest.gz} . && \
-    mongorestore --gzip --archive=${FILE:-latest.gz} -h $MONGO_HOST
+    mongorestore --gzip --archive=${FILE:-latest.gz} --drop --preserveUUID -h $MONGO_HOST $MONGO_RESTORE_OPTS
 }
 
 #

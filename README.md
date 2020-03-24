@@ -69,6 +69,11 @@ This environment variable `is required` in restore mode. This environment variab
 This environment variable `is optional` for you to use this image.
 This environment variable specifies the mongoDB database name.
 
+### `MONGO_RESTORE_OPTS`
+
+This environment variable `is optional` for you to use this image.
+This environment variable specifies the [mongoDB restore options](https://docs.mongodb.com/manual/reference/program/mongorestore/).
+
 ### `FILE`
 
 This environment variable `is optional` for you to use this image.
